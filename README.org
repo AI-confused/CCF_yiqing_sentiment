@@ -1,0 +1,29 @@
+* 疫情文本情感分析
+** data analyze
+    + 文本平均长度87.4，最大长度241，有354个文本为Nan(float),所有样本lable为str类型，需要处理为int类型，有80个样本的lable为Nan,6个样本的lable不是-1，0，1
+    + 训练数据选取文本长度>10的数据，这个值可以修改
+** data process
+   + 上传太赶，可能有bug *_*
+   + 可以直接使用data/train.csv，这个文件经过初步清洗，就差最后一步拆分5折
+   + 也可以用原始训练集从头到尾清洗一遍做练习
+** parameters description
+   + model_name_or_path:预训练模型地址
+   + data_dir:数据根目录
+   + output_dir:输出模型&log存放地址
+   + max_seq_length:预训练模型最大文本长度
+   + eval_steps：每*步进行验证，每一步训练一个batch
+   + per_gpu_train_batch_size：每块GPU卡的训练batch
+   + per_gpu_eval_batch_size：每块GPU卡的验证batch
+   + train_steps:总共训练的步数，参考 总步数*batch/all_data=epoch
+   + do_eval_train:如果添加这个参数，验证的时候会验证训练集
+** data description
+   + /data/test.csv经过处理，把空文本替换为“你好”，并且在预测的时候统一赋予0的lable
+   + /data/train.csv未分5折，经过初步处理
+** run
+   + run之前确保数据已分为5折，模型地址无误，数据处理正确
+   + run train: bash run_bert.sh
+   + run test: bash test.sh
+** baseline result
+   | model         | seq_len |   lr | train_accuracy | dev_accuracy | test_score | tag   |
+   |---------------+---------+------+----------------+--------------+------------+-------|
+   | bert_base_wwm |     256 | 1e-5 |            0.8 |       0.7224 |      0.718 | 1fold |
