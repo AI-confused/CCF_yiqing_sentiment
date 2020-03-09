@@ -1,6 +1,8 @@
 from transformers import BertTokenizer, AdamW, BertModel, BertPreTrainedModel
 import torch.nn as nn
 from torch.nn import CrossEntropyLoss
+import torch
+import numpy as np
 # from model_cnn import CNN_Text
 
 class BertForSimilary(BertPreTrainedModel):
@@ -32,6 +34,7 @@ class BertForSimilary(BertPreTrainedModel):
         
         if labels is not None:
             loss_fct = CrossEntropyLoss()
+#             loss_fct = CrossEntropyLoss(weight=torch.from_numpy(np.array([1, 0.296, 0.684])).float(), size_average=True).to('cuda')
             loss = loss_fct(logits.view(-1, self.num_labels), labels.view(-1))
             outputs = loss
         else:
