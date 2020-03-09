@@ -360,7 +360,6 @@ def main():
                               'global_step': global_step,
                               'loss': train_loss}
 
-#                     output_eval_file = os.path.join(args.output_dir, "eval_results.txt")
                     with open(output_eval_file, "a") as writer:
                         writer.write(file)
                         for key in sorted(result.keys()):
