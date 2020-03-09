@@ -7,7 +7,7 @@ python run_bert.py \
 --do_test \
 --index $i \
 --data_dir ./data/ \
---output_dir ./output_chinese_wwm_weight_$i \
+--output_dir ./output_chinese_wwm1_$i \
 --max_seq_length 256 \
 --eval_steps 200 \
 --per_gpu_train_batch_size 16 \

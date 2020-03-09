@@ -380,8 +380,10 @@ def main():
                         print("="*80)
                     else:
                         print("="*80)
-                        
-                        
+        with open(output_eval_file, "a") as writer:
+            writer.write('bert_acc: %f'%best_acc)                    
+    
+    
     if args.do_test:
         args.do_train=False
         model = BertForSimilary.from_pretrained(os.path.join(args.output_dir, "pytorch_model.bin"), config=config)
